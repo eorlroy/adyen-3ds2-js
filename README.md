@@ -82,20 +82,22 @@ Take the `acsURL` value (the URL the challenge iframe will display):
 const acsURL = threeDS2ResponseData.acsURL
 ```
 
-Create the `cReqData`:
-```
-const cReqData = {
-threeDSServerTransID : pResp.additionalData['threeds2.threeDS2ResponseData.threeDSServerTransID'],
-acsTransID : pResp.additionalData['threeds2.threeDS2ResponseData.acsTransID'],
-messageVersion : pResp.additionalData['threeds2.threeDS2ResponseData.messageVersion'],
-messageType : 'CReq'
-}
-```
 Create the iframe [configuration object](https://docs.adyen.com/developers/3d-secure-2-0/web-sdk-integration/web-sdk-reference-3d-secure-2-0):
 ```
 const iframeConfig = {
 size: '01', // The size you'd like the iframe to be can be '01' - '05' as documented
 container: '' // Container to place the generated iframe into OR an actual iframe
+}
+```
+
+Create the `cReqData`:
+```
+const cReqData = {
+challengeWindowSize: iframeConfig.size,
+threeDSServerTransID : pResp.additionalData['threeds2.threeDS2ResponseData.threeDSServerTransID'],
+acsTransID : pResp.additionalData['threeds2.threeDS2ResponseData.acsTransID'],
+messageVersion : pResp.additionalData['threeds2.threeDS2ResponseData.messageVersion'],
+messageType : 'CReq'
 }
 ```
 
